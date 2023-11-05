@@ -1,0 +1,18 @@
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        
+        # Define a helper function to perform the recursive traversal
+        def inorder(node):
+            if node:
+                # First, traverse the left subtree
+                inorder(node.left)
+                # Then, add the current node's value to the result
+                result.append(node.val)
+                # Finally, traverse the right subtree
+                inorder(node.right)
+        
+        # Start the traversal from the root
+        inorder(root)
+        
+        return result    
