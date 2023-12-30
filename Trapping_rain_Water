@@ -1,0 +1,44 @@
+class Solution:
+    def trappingWater(self, arr,n):
+        #Code here
+        water=0
+        left=arr[0]
+        right=arr[-1]
+        mid=-1
+        for i in range(n):
+            if(arr[i]>left and arr[i]>right and arr[i]>mid):
+                mid=arr[i]
+        if (mid==-1):
+            if(left<=right):
+                temp=left
+                for i in range(n):
+                    if(arr[i]<temp):
+                        water+=temp-arr[i]
+                    else:
+                        temp=arr[i]
+            else:
+                temp=right
+                for i in range(n):
+                    if(arr[-i-1]<temp):
+                        water+=temp-arr[-i-1]
+                    else:
+                        temp=arr[-i-1]
+        else:
+            last_tall_wall=-1
+            for i in range(n):
+                if(arr[-i-1]==mid):
+                    last_tall_wall=n-i-1
+            temp=left
+            for i in range(last_tall_wall+1):
+                if(arr[i]<temp):
+                    water+=temp-arr[i]
+                else:
+                    temp=arr[i]
+            temp=right
+            for i in range(last_tall_wall+1,n):
+                if(arr[-i+last_tall_wall]<temp):
+                    water+=temp-arr[-i+last_tall_wall]
+                else:
+                    temp=arr[-i+last_tall_wall]
+                    
+        return water
