@@ -1,0 +1,53 @@
+#User function Template for python3
+
+class Solution:
+    def validChoice(self, matrix, row, col, n):
+        for r in range(row):
+            if matrix[r][col] == 1:
+                return False
+                
+        r = row - 1
+        c = col - 1
+        while r > -1 and c > -1:
+            if matrix[r][c] == 1:
+                return False
+            r -= 1
+            c -= 1
+        
+        r = row - 1
+        c = col + 1
+        while r > -1 and c < n:
+            if matrix[r][c] == 1:
+                return False
+            r -= 1
+            c += 1
+        
+        return True
+    
+    def addSol(self, sol, matrix, n):
+        ans = []
+        for row in range(n):
+            for col in range(n):
+                if matrix[row][col] == 1:
+                    ans.append(col + 1)
+        sol.append(ans)
+        
+    def nQueenUtil(self, matrix, row, n, sol):
+        if row == n:
+            self.addSol(sol, matrix, n)
+            return
+        
+        for c in range(n):
+            if self.validChoice(matrix, row, c, n):
+                matrix[row][c] = 1
+                self.nQueenUtil(matrix, row + 1, n, sol)
+                matrix[row][c] = 0
+        
+    def nQueen(self, n):
+        # code here
+        sol = []
+        matrix = [[0]*n for i in range(n)]
+        self.nQueenUtil(matrix, 0, n, sol)
+        return sol
+            
+        
