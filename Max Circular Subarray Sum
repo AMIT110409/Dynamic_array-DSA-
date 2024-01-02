@@ -1,0 +1,23 @@
+#User function Template for python3
+
+#Complete this function
+#Function to find maximum circular subarray sum.
+def circularSubarraySum(arr,nums):
+    if nums==1:
+        return arr[0]
+    tl=0
+    currmaxsss=arr[0]
+    maxsum=arr[0]
+    currmin=arr[0]
+    minsum=arr[0]
+    for j in arr:
+        tl+=j
+    for j in range(1,nums):
+        currmaxsss=max(currmaxsss+arr[j],arr[j])
+        maxsum=max(currmaxsss,maxsum)
+        currmin=min(currmin+arr[j],arr[j])
+        minsum=min(currmin,minsum)
+    if tl==minsum:
+        return maxsum
+    return max(maxsum,(tl-minsum))
+   
