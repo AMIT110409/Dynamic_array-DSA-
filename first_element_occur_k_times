@@ -1,0 +1,12 @@
+class Solution:
+    def firstElementKTime(self,  a, n, k):
+        # code here
+        count_dict = {}
+        
+        for n in a:
+            count_dict[n] =count_dict.get(n,0) +1
+            
+            if count_dict[n] == k:
+                return n
+        
+        return -1    
