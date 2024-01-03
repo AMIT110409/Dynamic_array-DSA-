@@ -1,0 +1,34 @@
+#User function Template for python3
+
+
+#Function to fix a given BST where two nodes are swapped.  
+class Solution:
+    def correctBST(self, root):
+        
+        # code here
+        first, middle, last, prev = [None], [None], [None], [None]
+
+        self.inorder(root, prev, first, middle, last)
+        
+        if first[0] and last[0]:
+            first[0].data, last[0].data = last[0].data, first[0].data
+
+        else:
+            first[0].data, middle[0].data = middle[0].data, first[0].data
+
+    def inorder(self, root, prev, first, middle, last):
+        if root is None:
+            return
+
+        self.inorder(root.left, prev, first, middle, last)
+
+        if prev[0] and root.data < prev[0].data:
+            if first[0] is None:
+                first[0] = prev[0]
+                middle[0] = root
+            else:
+                last[0] = root
+
+        prev[0] = root
+        self.inorder(root.right, prev, first, middle, last)
+
