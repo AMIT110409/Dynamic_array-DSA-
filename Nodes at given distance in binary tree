@@ -1,0 +1,39 @@
+q = deque()
+        if not root:
+            return root
+        q.append(root)
+        need = None
+        parent = {}
+        while q:
+            node = q.popleft()
+            if node.data == target:
+                need = node
+            if node.left:
+                q.append(node.left)
+                parent[node.left] = node
+            if node.right:
+                q.append(node.right)
+                parent[node.right] = node
+        visited = set()
+        visited.add(need)
+        q = deque()
+        q.append(need)
+        c = 0
+        while q:
+            if c == k:
+                break
+            for i in range(len(q)):
+                node = q.popleft()
+                if node.left and node.left not in visited:
+                    q.append(node.left)
+                    visited.add(node.left)
+                if node.right and node.right not in visited:
+                    q.append(node.right)
+                    visited.add(node.right)
+                if node in parent and parent[node] not in visited:
+                    q.append(parent[node])
+                    visited.add(parent[node])
+            c += 1
+        l = [node.data for node in q]
+        l.sort()
+        return l
