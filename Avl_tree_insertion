@@ -1,0 +1,89 @@
+
+class Solution:
+    def insertToAVL(self, node, key):
+        if not node:
+            return Node(key)
+        
+        elif node.data > key:
+            node.left = self.insertToAVL(node.left,key)
+
+        else:
+            node.right = self.insertToAVL(node.right,key)
+
+        #set tree height
+
+        node.height = 1 + max(self.get_height(node.right),self.get_height(node.left))
+
+        #get the balance
+        
+        balance = self.get_balance(node)
+
+        if balance > 1 and key < node.left.data: 
+            return self.right_rotate(node) 
+  
+        # Case 2 - Right Right 
+        if balance < -1 and key > node.right.data: 
+            return self.left_rotate(node) 
+  
+        # Case 3 - Left Right 
+        if balance > 1 and key > node.left.data: 
+            node.left = self.left_rotate(node.left) 
+            return self.right_rotate(node) 
+  
+        # Case 4 - Right Left 
+        if balance < -1 and key < node.right.data: 
+            node.right = self.right_rotate(node.right) 
+            return self.left_rotate(node) 
+  
+        
+        return node
+
+
+    def right_rotate (self,root):
+
+        y = root.left
+        t2 = y.right
+        
+        y.right = root
+        root.left = t2
+        # self.display_tree(y)
+           # Update heights 
+        root.height = 1 + max(self.get_height(root.left), 
+                         self.get_height(root.right)) 
+        y.height = 1 + max(self.get_height(y.left), 
+                         self.get_height(y.right)) 
+        return y
+
+
+    def left_rotate(self, z): 
+  
+        y = z.right 
+        T2 = y.left 
+  
+        # Perform rotation 
+        y.left = z 
+        z.right = T2 
+  
+        # Update heights 
+        z.height = 1 + max(self.get_height(z.left), 
+                         self.get_height(z.right)) 
+        y.height = 1 + max(self.get_height(y.left), 
+                         self.get_height(y.right)) 
+  
+        # Return the new root 
+        return y 
+
+
+    def get_height(self,root):
+        if not root:
+            return 0
+        return root.height
+
+
+    def get_balance(self,root):
+        
+        if not root:
+            return 0
+        
+        return self.get_height(root.left) - self.get_height(root.right) 
+
