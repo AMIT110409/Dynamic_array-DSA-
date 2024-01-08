@@ -1,0 +1,13 @@
+class Solution:
+    
+    #Function to check whether a Binary Tree is BST or not.
+    def isBST(self, root):
+        #code here
+        def isb(root,left,right):
+            if not root:
+                return 1
+            if left >= root.data or right <= root.data:
+                return 0
+            return (isb(root.left,left,root.data) and isb(root.right,root.data,right))
+        return isb(root,float("-inf"),float("inf"))    
+                
