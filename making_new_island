@@ -1,0 +1,39 @@
+from typing import List
+
+class Solution:
+    def largestIsland(self, grid : List[List[int]]) -> int:
+        
+        # Code here
+        def dfs(i, j, index):
+            if 0 <= i < n and 0 <= j < n and grid[i][j] == 1:
+                grid[i][j] = index
+                return 1 + dfs(i - 1, j, index) + dfs(i + 1, j, index) + dfs(i, j - 1, index) + dfs(i, j + 1, index)
+            return 0
+    
+        n = len(grid)
+        area_map = {}
+        index = 2
+    
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    area_map[index] = dfs(i, j, index)
+                    index += 1
+    
+        result = max(area_map.values(), default=0)
+    
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j] == 0:
+                    connected_islands = set()
+                    for ni, nj in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+                        if 0 <= ni < n and 0 <= nj < n and grid[ni][nj] > 1:
+                            connected_islands.add(grid[ni][nj])
+    
+                    current_area = 1
+                    for island_index in connected_islands:
+                        current_area += area_map[island_index]
+    
+                    result = max(result, current_area)
+
+        return result  
