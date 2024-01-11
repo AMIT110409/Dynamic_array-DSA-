@@ -1,0 +1,23 @@
+
+from typing import List
+from queue import Queue
+class Solution:
+    #Function to return Breadth First Traversal of given graph.
+    def bfsOfGraph(self, V: int, adj: List[List[int]]) -> List[int]:
+        # code here
+        visit=set()
+        queue=[]
+        queue.append(0)
+        res=[]
+        
+        while queue:
+            for i in range(len(queue)):
+                curr=queue.pop(0)
+                if curr not in visit:
+                    visit.add(curr)
+                    res.append(curr)
+                    for j in adj[curr]:
+                        if j not in visit:
+                            queue.append(j)
+                        
+        return res
