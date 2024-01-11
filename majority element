@@ -1,0 +1,21 @@
+class Solution:
+    def majorityElement(self, A, N):
+        #Your code here
+        candidate=0
+                count=0
+                for i in range(N):
+                    if count==0:
+                        candidate=A[i]
+                        count=1
+                    elif candidate==A[i]:
+                        count+=1
+                    else:
+                        count-=1
+                for i in range(N):
+                    if A[i]==candidate:
+                        count+=1
+                if count>(N/2):
+                    return candidate
+                return -1
+                
+        #Your code here
