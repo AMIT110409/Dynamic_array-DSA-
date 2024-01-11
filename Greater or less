@@ -1,0 +1,16 @@
+class Solution:
+    def greaterLesser (self, A, N):
+        # code here 
+        li=A[:]
+        li.sort()
+        di={}
+        for i in range(N):
+            if li[i] not in di.keys():
+                di[li[i]]=[i]
+            else:
+                di[li[i]].append(i)
+        ans=[]
+        for i in range(N):
+            ans.append(abs(i-di[A[i]][0]))
+            di[A[i]].pop(0)
+        return ans
