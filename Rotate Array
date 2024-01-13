@@ -1,0 +1,12 @@
+
+class Solution:
+    #Function to rotate an array by d elements in counter-clockwise direction. 
+    def rotateArr(self,array,R,N):
+        #Your code here
+        temp = [0] * len(array)
+        size = len(array)
+        for idx in range(0, len(array)):
+            temp[(idx - R + size) % size] = array[idx]
+      
+        for idx in range(0, size):
+            array[idx] = temp[idx]
