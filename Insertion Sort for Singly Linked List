@@ -1,0 +1,38 @@
+#User function Template for python3
+
+'''
+# Node Class
+class Node:
+    def __init__(self, data):   # data -> value stored in node
+        self.data = data
+        self.next = None
+'''
+
+class Solution:
+    def insertionSort(self, head):
+        # Check if the linked list is empty or has only one node
+        if head is None or head.next is None:
+            return head
+
+        # Dummy node to simplify the code
+        dummy = Node(0)
+        dummy.next = head
+
+        current = head.next
+        last_sorted = head
+
+        while current:
+            if last_sorted.data <= current.data:
+                last_sorted = last_sorted.next
+            else:
+                prev = dummy
+                while prev.next.data <= current.data:
+                    prev = prev.next
+
+                last_sorted.next = current.next
+                current.next = prev.next
+                prev.next = current
+
+            current = last_sorted.next
+
+        return dummy.next
