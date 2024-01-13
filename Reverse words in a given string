@@ -1,0 +1,12 @@
+
+class Solution:
+    
+    #Function to reverse words in a given string.
+    def reverseWords(self,S):
+        # code here
+        a =S.split('.')
+        
+        for i in range(len(a)):
+            
+            t = '.'.join(a[::-1])
+        return t 
