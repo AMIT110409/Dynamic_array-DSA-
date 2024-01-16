@@ -1,0 +1,11 @@
+class Solution:
+    def numberSequence(self, m, n):
+        # code here
+        #User function Template for python3
+        if n>m:#base case is m<n or n>m then we cannot make the possible sequecn as we will not have the required amount to make the sequence and vice verse
+            return 0 #then we return 00
+        if n==0:#if n==0 no element to make we retuen 1 to make only one possible cases
+            return 1
+        if n==1:#if n==1 we can make m no of sequences from it which would be an relative base case on forward
+            return m
+        return self.numberSequence(m//2,n-1)+self.numberSequence(m-1,n)#here we use the divide and comquer we we take the m,n into consisderation and make the calls of the choicing it an dnot choicing it into action sequence
