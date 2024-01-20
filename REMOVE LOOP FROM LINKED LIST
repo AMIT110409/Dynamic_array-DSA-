@@ -1,0 +1,37 @@
+# node class:
+
+class Node:
+    def __init__(self,val):
+        self.next=None
+        self.data=val
+
+'''
+
+class Solution:
+    #Function to remove a loop in the linked list.
+    def removeLoop(self, head):
+        # code here
+        # remove the loop without losing any nodes
+        slow = head
+        fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            
+            if slow == fast:
+                break
+        
+        if not fast or not fast.next or slow != fast:
+            return None
+            
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        
+        p = slow.next
+        while p.next != slow:
+            p = p.next
+        
+        p.next = None
+
