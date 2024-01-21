@@ -1,0 +1,20 @@
+#Function to check whether a binary tree is balanced or not.
+class Solution:
+    def isBalanced(self,root):
+    
+        #add code here
+        return dfsheight(root) != -1
+
+def dfsheight(root):
+    if root is None: return 0
+
+    left_weight = dfsheight(root.left)
+    if left_weight == -1: return -1
+
+    right_weight = dfsheight(root.right)
+    if right_weight == -1: return -1
+
+    if abs(left_weight - right_weight) > 1: return -1
+
+    return 1 +  max(left_weight, right_weight)
+
