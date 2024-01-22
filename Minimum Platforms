@@ -1,0 +1,25 @@
+#User function Template for python3
+
+class Solution:    
+    #Function to find the minimum number of platforms required at the
+    #railway station such that no train waits.
+    def minimumPlatform(self,n,arr,dep):
+        # code here
+        time = [ (time,'a') for time in arr] + [ (time,'e') for time in dep]
+        
+        time.sort(key = lambda x:(x[0],x[1]))
+        
+        platform = 0
+        res = 0
+        
+        for t, tag in time:
+
+            if tag == 'a':
+                platform +=1
+            if tag == 'e':
+                platform -=1
+                
+            res = max(platform, res)
+
+                
+        return res
