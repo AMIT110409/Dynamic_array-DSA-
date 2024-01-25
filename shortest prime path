@@ -1,0 +1,40 @@
+#User function Template for python3
+from queue import Queue
+class Solution:
+    def solve(self, num1, num2):
+        prime = [1] * 10000
+        for i in range(2, int(10000**0.5) + 1):
+            if prime[i]:
+                for j in range(i**2, 10000, i):
+                    prime[j] = 0
+
+        st = set()
+        for i in range(1000,10000):
+            if prime[i]:
+                st.add(i)
+        q = Queue()
+        q.put((0, num1))
+
+        while not q.empty():
+            dist, node = q.get()
+            if num2 == node:
+                return dist
+
+            num_str = str(node)
+
+            for i in range(4):
+                for j in range(10):
+                    arg = num_str[i]
+                    num_str_list = list(num_str)
+                    num_str_list[i] = str(j)
+                    new_num = int(''.join(num_str_list))
+
+                    if new_num in st:
+                        st.remove(new_num)
+                        if new_num == num2:
+                            return dist + 1
+                        q.put((dist + 1, new_num))
+
+                    num_str_list[i] = arg
+
+        return -1
