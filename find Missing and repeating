@@ -1,0 +1,18 @@
+#User function Template for python3
+
+class Solution:
+    def findTwoElement( self,arr, n): 
+        # code here
+        duplicate = -1
+        duplicateSet = set()
+        
+        for a in arr:
+            if a in duplicateSet:
+                duplicate = a
+                break
+            duplicateSet.add(a)
+        
+        expectedSum = (n * (n+1)) // 2 
+        actualSum = sum(arr) - duplicate
+        
+        return [duplicate , expectedSum - actualSum]
