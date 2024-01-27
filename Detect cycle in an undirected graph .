@@ -1,0 +1,29 @@
+from typing import List
+class Solution:
+    #Function to detect cycle in an undirected graph.
+    def dfs(self, V , adj ,visi,  i , par):
+        visi[i] = True
+        a = False
+        for j in adj[i]:
+            # print(i ,par ,  j , visi[j])
+        
+            if visi[j] == False:
+            
+              
+                if self.dfs(V, adj , visi, j , i):
+                    return True
+                    
+                
+            elif visi[j] == True and j != par:
+                return True
+            
+        return False
+    def isCycle(self, V: int, adj: List[List[int]]) -> bool:
+        #Code here
+        visi = [False]*V
+        for i in range(V):
+            if visi[i] == False:
+                if self.dfs(V, adj , visi , i , -1) == True:
+                    return True
+        
+        return False
