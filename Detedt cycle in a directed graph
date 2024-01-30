@@ -1,0 +1,36 @@
+#User function Template for python3
+
+
+class Solution:
+    
+    #Function to detect cycle in a directed graph.
+    def isCyclic(self, V, adj):
+        #visited
+        isVisited=[0]*V
+        isPathVisited=[0]*V
+        #dfs algo
+        def dfs(i):
+            #make visited and also path visited
+            isVisited[i]=1
+            isPathVisited[i]=1
+            #iterate to neighbour
+            for neighbour in adj[i]:
+                #if not visited
+                if isVisited[neighbour]==0:
+                    if dfs(neighbour)==True:
+                        return True
+                #if node already visted ensure both are in same path
+                elif isPathVisited[neighbour]==1:
+                    return True
+            #at backtracking make pathvisited to unvisited
+            isPathVisited[i]=0
+            return False
+                    
+        #pathvisited
+        #iterate for components of graph
+        for i in range(V):
+            if isVisited[i]==0:
+                if dfs(i)==True:
+                    return True
+        return False
+  
