@@ -1,0 +1,16 @@
+#User function Template for python3
+
+class Solution:
+    
+    #Function to find the smallest positive number missing from the array.
+    def missingNumber(self,arr,n):
+        #Your code here
+        set_arr=set(arr)
+        mini=1
+        maxi=max(arr)
+        for i in range(maxi):
+            if mini in set_arr:
+                mini+=1
+            else:
+                return mini
+        return mini
