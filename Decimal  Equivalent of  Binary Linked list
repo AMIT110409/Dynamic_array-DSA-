@@ -1,0 +1,28 @@
+# your task is to complete this function
+# Function should return an integer value
+
+'''
+class node:
+    def __init__(self):
+        self.data = None
+        self.next = None
+'''
+
+class Solution:
+    def decimalValue(self, head):
+        num = ''
+        
+        # Convert the linked list to a string
+        while head:
+            num += str(head.data)
+            head = head.next
+        
+        res, pv = 0, 1
+        
+        # Traverse the string in reverse, multiplying each bit by increasing powers of 2
+        for i in range(len(num) - 1, -1, -1):
+            res += pv * int(num[i])
+            pv = (pv * 2) % 1000000007  # Update power of 2 modulo 10^9+7
+            res %= 1000000007  # Update result modulo 10^9+7
+        
+        return res
