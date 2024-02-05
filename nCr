@@ -1,0 +1,13 @@
+#User function Template for python3
+
+class Solution:
+    def nCr(self, n, r):
+        # code here
+        if r>n:
+            return 0
+        dp=[1 for i in range(n+1)]
+        dp[0]=1
+        dp[1]=1
+        for i in range(1,n+1):
+            dp[i]=dp[i-1]*i
+        return (dp[n]//(dp[n-r]*dp[r]))%(10**9+7)
