@@ -1,0 +1,33 @@
+
+class Node:
+    def __init__(self, data):   # data -> value stored in node
+          self.data = data
+          self.next = None
+
+
+#Function to check whether the list is palindrome.
+class Solution:
+    def isPalindrome(self, head):
+        stack=[]
+        curr=head
+        while curr:
+            stack.append(curr.data)
+            curr=curr.next
+        start=head
+        while start and len(stack)!=None:
+            last=stack.pop()
+            if start.data!=last:
+                return False
+            start=start.next
+        return True
+                
+                
+            
+                
+            
+        
+        
+        
+        
+            
+        
