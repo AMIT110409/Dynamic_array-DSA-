@@ -1,0 +1,31 @@
+#User function Template for python3
+
+'''
+@input - 
+node - root node of given tree
+k = distance of nodes required 
+
+class Node:
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+'''
+
+class Solution:
+    def helper(self, root, k, nodeSet, pList):
+        if root == None: return
+        if root.left == None and root.right == None:
+            if k == 0: nodeSet.add(root)
+            elif len(pList) < k: return
+            else: nodeSet.add(pList[len(pList) - k])
+            return
+        pList.append(root)
+        self.helper(root.left, k, nodeSet, pList)
+        self.helper(root.right, k, nodeSet, pList)
+        pList.pop()
+    
+    def printKDistantfromLeaf(self, root, k):
+        nodeSet = set()
+        self.helper(root, k, nodeSet, [])
+        return len(nodeSet)
