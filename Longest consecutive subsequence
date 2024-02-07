@@ -1,0 +1,28 @@
+ #User function Template for python3
+ 
+class Solution:
+    
+    # arr[] : the input array
+    # N : size of the array arr[]
+    
+    #Function to return length of longest subsequence of consecutive integers.
+    def findLongestConseqSubseq(self,arr, N):
+        #code here
+        if not arr:
+            return 0
+            
+        hashset = set(arr)
+        maxlen = 0
+        
+        for num in arr:
+            if num - 1 not in hashset:
+                current_num = num
+                current_length = 1
+                
+                while current_num + 1 in hashset:
+                    current_num += 1
+                    current_length += 1
+                    
+                maxlen = max(maxlen, current_length)
+                
+        return maxlen
