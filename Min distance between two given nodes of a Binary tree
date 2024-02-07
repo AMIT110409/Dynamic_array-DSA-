@@ -1,0 +1,35 @@
+#User function Template for python3
+
+'''
+# Node Class:
+class Node:
+    def __init__(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
+class Solution:
+    def findDist(self,root,a,b):
+        def findlca(root,a,b):
+            if root is None: return None
+            if root.data==a or root.data==b:
+                return root
+            left=findlca(root.left,a,b)
+            right=findlca(root.right,a,b)
+            if left != None and right != None:
+                return root
+            elif left!=None:
+                return left
+            else:
+                return right
+        def dist(lca,val):
+            if lca is None: return 100000
+            if lca.data == val:
+                return 0
+            return 1+min(dist(lca.left,val),dist(lca.right,val))
+        lca1=findlca(root,a,b)
+        return dist(lca1,a)+dist(lca1,b)
+            
+    
+        #return: minimum distance between a and b in a tree with given root
+        #code here
