@@ -1,0 +1,27 @@
+#User function Template for python3
+import collections
+class Solution:
+     
+    #Function to find if there exists a triplet in the 
+    #array A[] which sums up to X.
+    def find3Numbers(self,a, n, x):
+        # Your Code Here
+        d = collections.Counter(a)
+        for i in range(n):
+            for j in range(i+1,n):
+                
+                req = x-a[i]-a[j]
+                if req==a[i] and req==a[j]:
+                    if d[req]>=3:
+                        return True
+                elif req==a[i]:
+                    if d[req]>=2:
+                        return True
+                elif req==a[j]:
+                    if d[req]>=2:
+                        return True
+                else:
+                    if d.get(req,0):
+                        return True
+        return False
+                
