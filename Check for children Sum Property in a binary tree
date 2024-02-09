@@ -1,0 +1,32 @@
+#User function Template for python3
+
+'''
+# Node Class:
+class Node:
+    def __init__(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
+
+class Solution:
+    #Function to check whether all nodes of a tree have the value 
+    #equal to the sum of their child nodes.
+    def isSumProperty(self, root):
+        
+        # code here
+        def isSumPropertyutil(root):
+            if root is None or root.left is None and root.right is None:
+                return 1
+            
+            left_data = 0 if root.left is None else root.left.data
+            right_data = 0 if root.right is None else root.right.data
+        
+            if root.data != left_data + right_data:
+                return 0
+            
+    
+            return isSumPropertyutil(root.left) and isSumPropertyutil(root.right)
+        
+        return isSumPropertyutil(root)
+
