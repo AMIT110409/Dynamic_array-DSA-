@@ -1,0 +1,33 @@
+#User function Template for python3
+        # code here
+class Solution:
+    def numberOfPath(self, n, k, arr):
+        dr = [1, 0]
+        dc = [0, 1]
+
+        def valid(x, y):
+            return 0 <= x < n and 0 <= y < n
+
+        dp = [[[ -1 for _ in range(k + 1)] for _ in range(n)] for _ in range(n)]
+
+        def helper(r, c, sum):
+            if r == n - 1 and c == n - 1:
+                return 1 if sum == arr[r][c] else 0
+
+            if dp[r][c][sum] != -1:
+                return dp[r][c][sum]
+
+            dp[r][c][sum] = 0
+
+            if arr[r][c] <= sum:
+                for dir in range(2):
+                    nr = r + dr[dir]
+                    nc = c + dc[dir]
+
+                    if valid(nr, nc):
+                        dp[r][c][sum] += helper(nr, nc, sum - arr[r][c])
+
+            return dp[r][c][sum]
+
+        return helper(0, 0, k)
+
