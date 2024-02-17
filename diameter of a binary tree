@@ -1,0 +1,24 @@
+class TreeNode:
+    def __init__(self, key):
+        self.val = key
+        self.left = None
+        self.right = None
+
+class Solution:
+    def diameter(self, root):
+        self.max_diameter = 0
+
+        def height_and_diameter(node):
+            if not node:
+                return 0
+            
+            left_height = height_and_diameter(node.left)
+            right_height = height_and_diameter(node.right)
+            
+            self.max_diameter = max(self.max_diameter, left_height + right_height)
+  
+            return max(left_height, right_height) + 1
+      
+        height_and_diameter(root)
+     
+        return self.max_diameter + 1
