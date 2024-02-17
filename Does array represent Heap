@@ -1,0 +1,11 @@
+class Solution:
+
+    def isMaxHeap(self,arr,n):
+        # Your code goes here       
+        for i in range(n//2):
+            if (2 * i + 1) < n and arr[i] < arr[2 * i + 1]:
+                return False
+            if (2 * i + 2 < n) and arr[i] < arr[2 * i + 2]:
+                return False
+        return True
+                
