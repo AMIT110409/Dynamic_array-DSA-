@@ -1,0 +1,21 @@
+#User function Template for python3
+
+class Solution:
+    def find_permutation(self, S):
+        res=[]
+        def rec(ip,S,op):
+            if len(ip)==0:
+                res.append(op)
+                return 
+            used=set()
+            for i in range(len(ip)):
+                if ip[i] in used:
+                    continue
+                used.add(ip[i])
+                new_ip=ip[:i]+ip[i+1:]
+                new_op=op+ip[i]
+                rec(new_ip,S,new_op)
+        rec(S,S,"")
+        return res
+        
+
