@@ -1,0 +1,52 @@
+from typing import List
+
+import sys
+sys.setrecursionlimit(10**9)
+class Solution:
+    
+    def solve(self, indx, buy, transaction, price, n, dp):
+        if indx==n:
+            return 0
+        if transaction==0:
+            return 0
+        
+        if dp[indx][buy][transaction]!=-1:
+            return dp[indx][buy][transaction]
+        
+        if buy==1:
+            take = -price[indx] + self.solve(indx+1, 0, transaction, price, n, dp)
+            not_take = self.solve(indx+1, 1, transaction, price, n, dp)
+            dp[indx][buy][transaction] = max(take, not_take)
+        else:
+            sell = price[indx] + self.solve(indx+1, 1, transaction-1, price, n, dp)
+            not_sell = self.solve(indx+1, 0, transaction, price, n, dp)
+            dp[indx][buy][transaction] = max(sell, not_sell)
+        return dp[indx][buy][transaction]
+    
+    def tabulation(self, n, price):
+        next_dp = [[0,0,0], [0,0,0]]
+        curr_dp = [[0,0,0], [0,0,0]]
+        
+        for indx in range(n-1, -1, -1):
+            for buy in range(2):
+                for transaction in range(1, 3):
+                    if buy==1:
+                        take = -price[indx] + next_dp[0][transaction]
+                        not_take = next_dp[1][transaction]
+                        curr_dp[buy][transaction] = max(take, not_take)
+                    else:
+                        sell = price[indx] + next_dp[1][transaction-1]
+                        not_sell = next_dp[0][transaction]
+                        curr_dp[buy][transaction] = max(sell, not_sell)
+            next_dp, curr_dp = curr_dp, next_dp
+            
+        return next_dp[1][2]
+                        
+    
+    def maxProfit(self, n : int, price : List[int]) -> int:
+        # code here
+        return self.tabulation(n, price)
+        dp = [[[-1]*3 for _ in range(2)] for _ in range(n+1)]
+        return self.solve(0, 1, 2, price, n, dp)
+        
+
