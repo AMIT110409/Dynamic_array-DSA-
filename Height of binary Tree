@@ -1,0 +1,31 @@
+#User function Template for python3
+
+'''
+# Node Class:
+class Node:
+    def _init_(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+        '''
+class Solution:
+    #Function to find the height of a binary tree.
+    def height(self, root):
+        # code here
+        if not root:
+            return root
+        q = []
+        q.append(root)
+        height = 0
+        while len(q):
+            n = len(q)
+            while n:
+                node = q.pop(0)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+                n -= 1
+            height += 1
+        return height
+
