@@ -1,0 +1,19 @@
+#User function Template for python3
+class Solution:
+
+    
+    def sumBitDifferences(self,arr, n):
+        totalsum = 0
+        for bit in range(32):
+            count = 0
+            for num in arr:
+                if num & (1 << bit):
+                    count += 1
+                    
+            totalsum += (count*(n-count)*2)
+        return totalsum
+            
+            
+                
+        
+
