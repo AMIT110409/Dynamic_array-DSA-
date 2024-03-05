@@ -1,0 +1,22 @@
+#User function Template for python3
+
+class Solution:
+    #Complete this function
+    # Function to find the maximum index difference.
+    def maxIndexDiff(self,a, n): 
+        # Your code here
+        dis = 0
+        stack = []
+        stack.append(0)
+        for i in range(1, n):
+            if(a[i] < a[stack[-1]]):
+                stack.append(i)
+                
+        j = n-1
+        dis = 0
+        while(j >= 0 and len(stack) > 0):
+            while(len(stack) > 0 and a[j] >= a[stack[-1]]):
+                i = stack.pop()
+                dis = max(dis, j-i)
+            j-=1
+        return dis
