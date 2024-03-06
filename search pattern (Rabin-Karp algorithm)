@@ -1,0 +1,10 @@
+#User function Template for python3
+
+class Solution:
+    def search(self, pattern, text):
+        # code here
+        l = []
+        for i in range(len(text)):
+            if text[i:i+len(pattern)]==pattern:
+                l.append(i+1)
+        return l    
