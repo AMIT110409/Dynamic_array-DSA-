@@ -1,0 +1,17 @@
+#User function Template for python3
+class Solution:
+    def sameFreq(self, s):
+        # code here
+        from collections import Counter
+        count=Counter(s)
+        freq=Counter(count.values())
+        if len(freq)>=3:
+            return False
+        if len(freq)==1:
+            return True
+        mn,mx=min(count.values()),max(count.values())
+        if freq[mx]==1 and mn+1==mx:
+            return True
+        if 1 in freq and freq[1]==1:
+            return True
+        return False
