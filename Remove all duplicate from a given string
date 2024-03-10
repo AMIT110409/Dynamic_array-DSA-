@@ -1,0 +1,11 @@
+#User function Template for python3
+class Solution:
+
+    
+    def removeDuplicates(self,str):
+        # code here
+        visited = ""
+        for i in str:
+            if i not in visited:
+                visited+=i
+        return visited
