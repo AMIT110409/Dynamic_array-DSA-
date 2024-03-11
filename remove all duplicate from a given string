@@ -1,0 +1,14 @@
+#User function Template for python3
+class Solution:
+
+    
+    def removeDuplicates(self,str):
+        # code here
+        a=""
+        for i in str:
+            if i not in a:
+                a+=i
+        return a
+                
+        
+
