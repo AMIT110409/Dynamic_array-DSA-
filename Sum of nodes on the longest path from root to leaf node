@@ -1,0 +1,18 @@
+#User function Template for python3
+ 
+'''
+class Node:
+    def __init__(self,val):
+        self.data=val
+        self.left=None
+        self.right=None
+'''
+class Solution:
+    def sumOfLongRootToLeafPath(self,root):
+        #code here
+        def dfs(root):
+            if not root:
+                return (0,0)
+            maxheight,maxsum=max(dfs(root.left),dfs(root.right))
+            return (maxheight+1,maxsum+root.data)
+        return dfs(root)[1]
