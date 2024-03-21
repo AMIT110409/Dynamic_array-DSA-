@@ -1,0 +1,43 @@
+from collections import deque
+
+class Node:
+    def __init__(self,val):
+        self.data = val
+        self.left = None
+        self.right = None
+
+class Solution:
+    def zigZagTraversal(self, root):
+        q = deque([root])
+        temp = []       # to hold node at a level
+        resnodes = [root]
+        level = 0       # root at level 0
+        while q:
+            node = q.popleft()
+            
+            if node.left:
+                temp.append(node.left)
+            if node.right:
+                temp.append(node.right)
+            
+            if not q:    # level is finished 
+                level += 1
+                if level % 2 == 1:
+                    q.extend(temp)
+                    resnodes.extend(temp[::-1]) # nodes at odd level are backwards
+                else:
+                    q.extend(temp)
+                    resnodes.extend(temp)
+                temp = []   # for next level
+        
+        resdata = [node.data for node in resnodes]
+        return resdata
+
+'''
+If we observe carefully, it is regular BFS but nodes in odd levels are reversed
+No changes in adding to queue but reverse odd level nodes in result
+
+We keep track of all nodes in a level using temp, then once the q is empty,
+we extend q with temp (all nodes of a level) at once. At last level temp is however
+empty which makes the q empty.
+'''  
