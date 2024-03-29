@@ -1,0 +1,7 @@
+#User function Template for python3
+
+class Solution:
+    def isEularCircuitExist(self, v, adj):
+        #Code here
+        arr = [len(i) % 2 == 0 for i in adj]
+        return all(arr)
