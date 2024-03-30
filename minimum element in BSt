@@ -1,0 +1,17 @@
+#User function Template for python3
+
+"""
+class Node:
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+"""
+
+class Solution:
+    def minValue(self, root):
+        if not root.left:
+            return root.data
+        if not (root.left or root.right):
+            return root.data
+        return self.minValue(root.left)
